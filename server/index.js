@@ -164,7 +164,7 @@ app.delete('/api/exercises/:id', authMiddleware, (req, res) => {
 });
 
 if (isProd) {
-  app.get('*', (_req, res) => {
+  app.get('/{*path}', (_req, res) => {
     res.sendFile(join(__dirname, '../dist/index.html'));
   });
 }
