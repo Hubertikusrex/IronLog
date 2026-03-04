@@ -1,0 +1,17 @@
+services:
+  iron-log:
+    build: .
+    ports:
+      - "3001:3001"
+    volumes:
+      - iron-log-data:/app/data
+    restart: unless-stopped
+    networks:
+      - proxy_netzwerk
+
+volumes:
+  iron-log-data:
+
+networks:
+  proxy_netzwerk:
+    external: true
