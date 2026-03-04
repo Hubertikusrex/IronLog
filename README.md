@@ -23,9 +23,9 @@ A self-hosted workout tracker with an industrial dark UI. Log sessions, track bo
 - Exercises in the library appear in the workout dropdown
 
 ### Rest Timer
-- Countdown timer with custom seconds input
-- Quick presets: 30 s / 60 s / 90 s / 120 s
-- Visual and audio cue when time is up
+- Countdown timer with minutes input (`M` or `M:SS` format)
+- Quick presets: **3 min / 5 min**
+- Visual (red flash) and audio cue when time is up
 
 ### Workout History
 - All past sessions listed with date, duration, and exercises
@@ -33,8 +33,10 @@ A self-hosted workout tracker with an industrial dark UI. Log sessions, track bo
 - Two-click delete per session
 
 ### Progress Chart
-- Bar chart of total volume (sets × reps × weight) per exercise
-- Filter by exercise name
+- Bar chart per exercise with two switchable metrics:
+  - **Volume** — sets × reps × weight (or sets × seconds for timed sets)
+  - **Max** — heaviest weight / longest set / duration logged per day
+- Filter by exercise name (populated from logged sessions)
 - Built with Recharts
 
 ### Body Weight Tracker
