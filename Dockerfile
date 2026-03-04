@@ -21,6 +21,7 @@ COPY --from=builder /app/dist ./dist
 ENV NODE_ENV=production
 ENV PORT=3001
 ENV DATA_FILE=/app/data/data.json
+ENV USERS_FILE=/app/data/users.json
 
 RUN mkdir -p /app/data
 

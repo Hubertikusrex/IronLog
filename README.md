@@ -126,6 +126,101 @@ Both files are created automatically and are excluded from git (see `.gitignore`
 
 ---
 
+## Docker Deployment
+
+### Requirements
+- Docker & Docker Compose
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/Hubertikusrex/IronLog.git
+cd IronLog/workout-app
+```
+
+### 2. Create a `.env` file
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` and set a strong secret:
+
+```env
+JWT_SECRET=change-this-to-a-long-random-string
+```
+
+Generate one with:
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+### 3. Build and start
+
+```bash
+docker compose up -d --build
+```
+
+The app runs on `http://localhost:3001`.
+
+### 4. Create a user account
+
+```bash
+docker compose exec iron-log node server/create-user.js <username> <password>
+```
+
+Run this once per user. You can add multiple users.
+
+### 5. Update to a new version
+
+```bash
+git pull
+docker compose up -d --build
+```
+
+---
+
+### Data persistence
+
+All data (sessions, weight log, exercises, users) is stored in a Docker named volume:
+
+```
+iron-log-data  →  /app/data  inside the container
+```
+
+The volume survives container restarts and image rebuilds. To back up your data:
+
+```bash
+# Copy data files to your host
+docker compose cp iron-log:/app/data ./backup
+```
+
+---
+
+### Using a reverse proxy (Traefik / Nginx)
+
+The included `docker-compose.yml` is already configured for an **external Docker network** called `proxy_netzwerk`. This is the typical setup when you run a reverse proxy (e.g. Traefik or Nginx Proxy Manager) on the same host.
+
+If you don't use a reverse proxy, change the network section to a simple setup:
+
+```yaml
+services:
+  iron-log:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - iron-log-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  iron-log-data:
+```
+
+---
+
 ## Scripts
 
 | Command         | Description                              |
