@@ -1,6 +1,7 @@
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # Server data (contain user data — never commit)
 server/data.json

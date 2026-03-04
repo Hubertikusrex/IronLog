@@ -74,14 +74,14 @@ A self-hosted workout tracker with an industrial dark UI. Log sessions, track bo
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/<your-username>/iron-log.git
-cd iron-log/workout-app
+git clone https://github.com/Hubertikusrex/IronLog.git
+cd IronLog
 npm install
 ```
 
 ### 2. Set environment variables
 
-Create a `.env` file in `workout-app/`:
+Create a `.env` file in the project root:
 
 ```env
 JWT_SECRET=change-this-to-a-long-random-string
@@ -137,16 +137,12 @@ Both files are created automatically and are excluded from git (see `.gitignore`
 
 ```bash
 git clone https://github.com/Hubertikusrex/IronLog.git
-cd IronLog/workout-app
+cd IronLog
 ```
 
 ### 2. Create a `.env` file
 
-```bash
-cp .env.example .env
-```
-
-Then edit `.env` and set a strong secret:
+Create a `.env` file in the project root and set a strong secret:
 
 ```env
 JWT_SECRET=change-this-to-a-long-random-string
